@@ -39,8 +39,15 @@ app.post("/get-text", upload.single("file"), async (req, res) => {
       text: sumJson.choices[0]?.message?.content || "",
     });
   } catch (error) {
-    res.status(500).send("Error parsing PDF");
+    res.status(404).json({
+      status: "fail",
+      text: err,
+    });
   }
+});
+
+app.get("/test", (req, res) => {
+  res.send("Hello World");
 });
 
 app.listen(port, () => {
